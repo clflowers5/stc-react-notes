@@ -1,4 +1,6 @@
+import '../style/NoteList.scss';
 import React, { Component } from 'react';
+import ReactLoading from 'react-loading';
 import Note from './Note';
 import { Grid, Row, Col } from 'react-bootstrap';
 import chunk from 'lodash/chunk';
@@ -9,6 +11,7 @@ const style = {
   marginBottom: 20
 };
 
+//TODO: refactor all the key gen
 class NoteList extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +42,7 @@ class NoteList extends Component {
       marginBottom: 20
     };
     return (
-      <Row style={style}>
+      <Row key={notes} style={style}>
         {notes.map(note => this.noteColumn(note))}
       </Row>
     );
@@ -47,7 +50,7 @@ class NoteList extends Component {
 
   noteColumn(note) {
     return (
-      <Col xs={6} md={4}>
+      <Col key={note + note.id} xs={6} md={4}>
         <Note key={note.id} title={note.title} content={note.content}/>
       </Col>
     );
@@ -58,7 +61,9 @@ class NoteList extends Component {
     return (
       <div style={style}>
         <Grid>
-          {noteGroups.map(group => this.notesRow(group))}
+          {noteGroups.length
+            ? noteGroups.map(group => this.notesRow(group))
+            : <ReactLoading className="loading-icon" type="spin" color="#444"/>}
         </Grid>
       </div>
     );
