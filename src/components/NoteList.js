@@ -6,6 +6,7 @@ import Note from './Note';
 import { Grid, Row, Col } from 'react-bootstrap';
 import chunk from 'lodash/chunk';
 import NoteService from '../services/noteService';
+import { addNote } from '../actions/note';
 
 const style = {
   marginTop: 20,
@@ -25,8 +26,7 @@ class NoteList extends Component {
   componentDidMount() {
     this.noteService.getAllNotes()
       .then(notes => {
-        //  redux set state here
-        debugger;
+        notes.data.data.forEach(note => this.props.dispatch(addNote(note.id, note.title, note.content)));
         this.setState({
           notes: notes.data.data
         });
@@ -43,7 +43,8 @@ class NoteList extends Component {
       marginBottom: 20
     };
     return (
-      <Row key={notes} style={style}>
+      //TODO: this is bad
+      <Row key={Math.random()} style={style}>
         {notes.map(note => this.noteColumn(note))}
       </Row>
     );

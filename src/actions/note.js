@@ -2,9 +2,10 @@ const ADD_NOTE = 'ADD_NOTE';
 const EDIT_NOTE = 'EDIT_NOTE';
 const DELETE_NOTE = 'DELETE_NOTE';
 
-function addNote(title, content) {
+function addNote(id, title, content) {
   return {
     type: ADD_NOTE,
+    id,
     title,
     content
   }

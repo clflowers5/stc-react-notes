@@ -22,7 +22,7 @@ class NoteService {
     return axios.post(url, reqBody);
   }
 
-  updateNote(noteId, title, content) {
+  updateNote(userId, noteId, title, content) {
     const url = this.baseUrl + `/${noteId}`;
     const reqBody = {title, content};
     return axios.put(url, reqBody);

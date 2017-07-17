@@ -1,17 +1,14 @@
-import { ADD_NOTE, EDIT_NOTE, DELETE_NOTE } from '../actions/note';
+import { ADD_NOTE, DELETE_NOTE } from '../actions/note';
+import Immutable from 'immutable';
 
-const notes = (state = [], action) => {
+const initialState = Immutable.Map({});
+
+const notes = (state = initialState, action) => {
   switch (action.type) {
     case ADD_NOTE:
       return state.set(action.id, {
         title: action.title,
-        text: action.text
-      });
-
-    case EDIT_NOTE:
-      return state.set(String(action.id), {
-        title: action.title,
-        text: action.text
+        content: action.content
       });
 
     case DELETE_NOTE:
