@@ -1,6 +1,6 @@
-import '../style/NoteList.scss';
 import React, { Component } from 'react';
 import ReactLoading from 'react-loading';
+import '../style/NoteList.scss';
 import Note from './Note';
 import { Grid, Row, Col } from 'react-bootstrap';
 import chunk from 'lodash/chunk';
@@ -51,7 +51,7 @@ class NoteList extends Component {
   noteColumn(note) {
     return (
       <Col key={note + note.id} xs={6} md={4}>
-        <Note key={note.id} title={note.title} content={note.content}/>
+        <Note key={note.id} id={note.id} title={note.title} content={note.content}/>
       </Col>
     );
   }

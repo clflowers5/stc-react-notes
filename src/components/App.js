@@ -1,7 +1,7 @@
-import '../style/App.css';
 import React, { Component } from 'react';
-import NoteList from './NoteList';
 import Header from './Header';
+import NoteList from './NoteList';
+import CreateNote from './CreateNote';
 import { Router, Route } from 'react-router';
 import { createBrowserHistory } from 'history';
 
@@ -11,11 +11,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header/>
-
         <Router history={history}>
           <div>
+            <Header/>
             <Route exact path="/" component={NoteList}/>
+            <Route exact path="/create" component={CreateNote}/>
           </div>
         </Router>
 

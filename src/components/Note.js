@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
+import '../style/Note.scss';
+import { LinkContainer } from 'react-router-bootstrap';
 
 class Note extends Component {
   constructor(props) {
-   super(props);
-   this.state = { ...props };
-
-   this.style = {
-     minHeight: 50,
-     minWidth: 100,
-     maxWidth: 300,
-     borderRadius: 5,
-     backgroundColor: 'red',
-     padding: 10
-   };
+    super(props);
+    this.state = {...props};
   }
 
   render() {
     return (
-     <div className="Note" style={this.style}>
-       <p>{this.props.title}</p>
-       <p>{this.props.content}</p>
-     </div>
+      <LinkContainer to={{pathname: `edit/${this.props.id}`}}>
+        <div>
+          <div className="Note">
+            <p className="title">{this.props.title}</p>
+            <p className="content">{this.props.content}</p>
+          </div>
+        </div>
+      </LinkContainer>
     );
   }
 }

@@ -1,0 +1,17 @@
+.Note {
+  min-height: 50px;
+  min-width: 100px;
+  max-width: 300px;
+  background-color: #ededed;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #939393;
+
+  .title {
+    font-weight: bold;
+  }
+
+  .content {
+    overflow: auto;
+  }
+}
