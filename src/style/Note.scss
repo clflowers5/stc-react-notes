@@ -6,6 +6,13 @@
   border-radius: 5px;
   padding: 10px;
   border: 1px solid #939393;
+  cursor: pointer;
+  transition: background-color 150ms linear;
+
+  &:hover {
+    background-color: #fafafa;
+    transition: background-color 150ms linear;
+  }
 
   .title {
     font-weight: bold;

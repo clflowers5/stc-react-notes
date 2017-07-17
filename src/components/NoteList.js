@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import ReactLoading from 'react-loading';
 import '../style/NoteList.scss';
 import Note from './Note';
@@ -15,9 +16,8 @@ const style = {
 class NoteList extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      notes: [],
-      activeNote: null
+    this.state ={
+      notes: []
     };
     this.noteService = new NoteService();
   }
@@ -25,8 +25,8 @@ class NoteList extends Component {
   componentDidMount() {
     this.noteService.getAllNotes()
       .then(notes => {
-        console.log(notes);
         //  redux set state here
+        debugger;
         this.setState({
           notes: notes.data.data
         });
@@ -38,6 +38,7 @@ class NoteList extends Component {
   }
 
   notesRow(notes) {
+    //TODO: pull this into scss
     const style = {
       marginBottom: 20
     };
@@ -70,4 +71,10 @@ class NoteList extends Component {
   }
 }
 
-export default NoteList;
+function mapStateToProps(state) {
+  return {
+    notes: state.notes
+  };
+}
+
+export default connect(mapStateToProps)(NoteList);

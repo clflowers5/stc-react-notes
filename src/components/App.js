@@ -16,9 +16,9 @@ class App extends Component {
             <Header/>
             <Route exact path="/" component={NoteList}/>
             <Route exact path="/create" component={CreateNote}/>
+            <Route path="/edit/:id" component={CreateNote}/>
           </div>
         </Router>
-
       </div>
     );
   }
