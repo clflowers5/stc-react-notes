@@ -4,7 +4,7 @@ import { findDOMNode } from 'react-dom';
 import { Grid, ControlLabel, FormGroup, FormControl, Button } from 'react-bootstrap';
 import '../style/CreateNote.scss';
 import NoteService from '../services/noteService';
-import { addNote } from '../actions/note';
+import { addNote, editNote } from '../actions/note';
 
 class CreateNote extends Component {
 
@@ -20,9 +20,9 @@ class CreateNote extends Component {
 
   componentWillMount() {
     const noteId = this.match.params.id;
-    const note = this.props.notes.get(Number(noteId));
 
     if (noteId) {
+      const note = this.props.notes.get(Number(noteId));
       this.setState({
         action: 'Edit',
         note: note,
@@ -51,7 +51,7 @@ class CreateNote extends Component {
       content = findDOMNode(content).value;
       this.noteService.updateNote(userId, this.state.id, title, content)
         .then(() => {
-          const action = addNote(this.state.id, title, content);
+          const action = editNote(this.state.id, title, content);
           this.props.dispatch(action);
           this.props.history.push('/');
         });
