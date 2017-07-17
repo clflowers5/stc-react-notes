@@ -33,6 +33,7 @@ class CreateNote extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
+    this.disableSubmit();
 
     const userId = 0; // Replace this with valid value if I get to User Auth
     let {title, content} = this.refs;
@@ -57,6 +58,11 @@ class CreateNote extends Component {
     }
   }
 
+  disableSubmit() {
+    const {submit} = this.refs;
+    findDOMNode(submit).disabled = true;
+  }
+
   render() {
     return (
       <div className="create-note">
@@ -68,7 +74,7 @@ class CreateNote extends Component {
               <FormControl type="text" ref="title" defaultValue={this.state.note.title} autoFocus required/>
               <ControlLabel>Content</ControlLabel>
               <FormControl type="textarea" ref="content" defaultValue={this.state.note.content} required/>
-              <Button type="submit" bsStyle="primary">{this.state.action} Note</Button>
+              <Button type="submit" ref="submit" bsStyle="primary">{this.state.action} Note</Button>
             </FormGroup>
           </form>
 
