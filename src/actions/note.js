@@ -1,6 +1,5 @@
 const ADD_NOTE_TO_LIST = 'ADD_NOTE_TO_LIST';
 const CREATE_NOTE = 'CREATE_NOTE';
-const EDIT_NOTE_IN_LIST = 'EDIT_NOTE_IN_LIST';
 const EDIT_NOTE = 'EDIT_NOTE';
 const DELETE_NOTE = 'DELETE_NOTE';
 const REMOVE_NOTE_FROM_LIST = 'REMOVE_NOTE_FROM_LIST';
@@ -10,15 +9,6 @@ const GET_NOTES_RECEIVED = 'GET_NOTES_RECEIVED';
 function addNoteToList(id, title, content) {
   return {
     type: ADD_NOTE_TO_LIST,
-    id,
-    title,
-    content
-  };
-}
-
-function editNoteInList(id, title, content) {
-  return {
-    type: EDIT_NOTE_IN_LIST,
     id,
     title,
     content
@@ -62,9 +52,15 @@ function getNotes() {
   };
 }
 
+function getNotesReceived(data) {
+  return {
+    type: GET_NOTES_RECEIVED,
+    data: data
+  };
+}
+
 export {
   ADD_NOTE_TO_LIST,
-  EDIT_NOTE_IN_LIST,
   CREATE_NOTE,
   EDIT_NOTE,
   DELETE_NOTE,
@@ -72,10 +68,10 @@ export {
   GET_NOTES,
   GET_NOTES_RECEIVED,
   addNoteToList,
-  editNoteInList,
   createNote,
   editNote,
   deleteNote,
   removeNoteFromList,
-  getNotes
+  getNotes,
+  getNotesReceived
 }

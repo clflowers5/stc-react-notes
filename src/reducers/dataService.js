@@ -1,4 +1,4 @@
-import { GET_NOTES, CREATE_NOTE, EDIT_NOTE, DELETE_NOTE, addNoteToList, editNoteInList } from '../actions/note';
+import { GET_NOTES, CREATE_NOTE, EDIT_NOTE, DELETE_NOTE, addNoteToList, getNotesReceived } from '../actions/note';
 import NoteService from '../services/noteService';
 
 const noteService = new NoteService();
@@ -10,17 +10,8 @@ const dataService = store => next => action => {
       noteService.getAllNotes()
         .then(res => {
           const data = res.data.data;
-          next({
-            type: 'GET_NOTES_RECEIVED',
-            data
-          });
-        })
-        .catch(err => {
-          return next({
-            //TODO: error type here?
-            type: 'GET_NOTES_ERROR',
-            err
-          });
+          const action = getNotesReceived(data);
+          next(action);
         });
 
       break;
@@ -31,24 +22,19 @@ const dataService = store => next => action => {
         .then(resp => {
           const {id, title, content} = resp.data.data;
           const action = addNoteToList(id, title, content);
-          store.dispatch(action);
+          next(action);
         });
 
       break;
 
     case EDIT_NOTE:
       noteService.updateNote(0, action.id, action.title, action.content)
-        .then(resp => {
-          console.log(resp);
-          const {id, title, content} = resp.data.data;
-          const action = editNoteInList(id, title, content);
-          store.dispatch(action);
-        });
-
+        .then(() => next(action));
       break;
 
     case DELETE_NOTE:
-      noteService.deleteNote(action.id);
+      noteService.deleteNote(action.id)
+        .then(() => next(action));
       break;
 
     default:

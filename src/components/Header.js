@@ -1,13 +1,14 @@
 import React from 'react';
 import { Navbar, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
 
 const appHeader = () => {
   return (
     <Navbar inverse collapseOnSelect>
       <Navbar.Header>
         <Navbar.Brand>
-          <a href="/">Note Taker</a>
+          <Link to="/">Note Taker</Link>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>

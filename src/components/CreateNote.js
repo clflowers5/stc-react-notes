@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { findDOMNode } from 'react-dom';
 import { Grid, ControlLabel, FormGroup, FormControl, Button } from 'react-bootstrap';
-import NoteService from '../services/noteService';
 import { createNote, editNote } from '../actions/note';
 import '../style/CreateNote.scss';
 
@@ -11,7 +10,6 @@ class CreateNote extends Component {
   constructor(props) {
     super(props);
     this.match = this.props.match;
-    this.noteService = new NoteService();
     this.state = {
       action: 'Create',
       note: {}
@@ -23,11 +21,15 @@ class CreateNote extends Component {
 
     if (noteId) {
       const note = this.props.notes.get(Number(noteId));
-      this.setState({
-        action: 'Edit',
-        note: note,
-        id: Number(noteId)
-      });
+      if (note) {
+        this.setState({
+          action: 'Edit',
+          note: note,
+          id: Number(noteId)
+        });
+      } else {
+        return this.props.history.push('/');
+      }
     }
   }
 
