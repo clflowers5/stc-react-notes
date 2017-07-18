@@ -1,4 +1,4 @@
-import { ADD_NOTE_TO_LIST, EDIT_NOTE, DELETE_NOTE, GET_NOTES_RECEIVED } from '../actions/note';
+import { ADD_NOTE_TO_LIST, EDIT_NOTE, REMOVE_NOTE_FROM_LIST, GET_NOTES_RECEIVED } from '../actions/note';
 import { OrderedMap } from 'immutable';
 
 const initialState = OrderedMap();
@@ -14,8 +14,8 @@ const notes = (state = initialState, action) => {
     case EDIT_NOTE:
       return state.set(action.id, buildNoteBody(action));
 
-    case DELETE_NOTE:
-      return state.remove(String(action.id));
+    case REMOVE_NOTE_FROM_LIST:
+      return state.remove(action.id);
 
     case GET_NOTES_RECEIVED:
       return action.data.reduce((result, note) => {

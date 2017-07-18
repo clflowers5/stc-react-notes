@@ -5,7 +5,7 @@ import Root from './components/Root';
 import { applyMiddleware, createStore } from 'redux';
 import { GET_NOTES } from './actions/note';
 import reducers from './reducers/rootReducer';
-import dataService from './services/dataService';
+import dataService from './reducers/dataService';
 
 
 

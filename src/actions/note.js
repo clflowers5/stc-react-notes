@@ -3,6 +3,7 @@ const CREATE_NOTE = 'CREATE_NOTE';
 const EDIT_NOTE_IN_LIST = 'EDIT_NOTE_IN_LIST';
 const EDIT_NOTE = 'EDIT_NOTE';
 const DELETE_NOTE = 'DELETE_NOTE';
+const REMOVE_NOTE_FROM_LIST = 'REMOVE_NOTE_FROM_LIST';
 const GET_NOTES = 'GET_NOTES';
 const GET_NOTES_RECEIVED = 'GET_NOTES_RECEIVED';
 
@@ -48,6 +49,13 @@ function deleteNote(id) {
   };
 }
 
+function removeNoteFromList(id) {
+  return {
+    type: REMOVE_NOTE_FROM_LIST,
+    id
+  };
+}
+
 function getNotes() {
   return {
     type: GET_NOTES
@@ -60,6 +68,7 @@ export {
   CREATE_NOTE,
   EDIT_NOTE,
   DELETE_NOTE,
+  REMOVE_NOTE_FROM_LIST,
   GET_NOTES,
   GET_NOTES_RECEIVED,
   addNoteToList,
@@ -67,5 +76,6 @@ export {
   createNote,
   editNote,
   deleteNote,
+  removeNoteFromList,
   getNotes
 }

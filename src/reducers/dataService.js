@@ -1,5 +1,5 @@
-import { GET_NOTES, CREATE_NOTE, EDIT_NOTE, addNoteToList, editNoteInList } from '../actions/note';
-import NoteService from './noteService';
+import { GET_NOTES, CREATE_NOTE, EDIT_NOTE, DELETE_NOTE, addNoteToList, editNoteInList } from '../actions/note';
+import NoteService from '../services/noteService';
 
 const noteService = new NoteService();
 
@@ -45,6 +45,10 @@ const dataService = store => next => action => {
           store.dispatch(action);
         });
 
+      break;
+
+    case DELETE_NOTE:
+      noteService.deleteNote(action.id);
       break;
 
     default:

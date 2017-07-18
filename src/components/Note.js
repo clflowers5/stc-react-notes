@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import '../style/Note.scss';
+import { deleteNote, removeNoteFromList } from '../actions/note';
 import { LinkContainer } from 'react-router-bootstrap';
 
 class Note extends Component {
@@ -10,8 +12,8 @@ class Note extends Component {
 
   removeNote(evt, id) {
     evt.preventDefault();
-    console.log('remove here');
-    console.log(id);
+    this.props.dispatch(deleteNote(id));
+    this.props.dispatch(removeNoteFromList(id));
   }
 
   render() {
@@ -31,4 +33,4 @@ class Note extends Component {
   }
 }
 
-export default Note;
+export default connect()(Note);
