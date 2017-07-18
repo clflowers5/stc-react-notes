@@ -9,7 +9,8 @@ class NoteList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: []
+      notes: [],
+      status: {}
     };
   }
 
@@ -27,7 +28,7 @@ class NoteList extends Component {
       <div>
         <Grid>
           {
-            this.props.notes.size
+            this.props.status.get('isFetching') === false
               ? this.props.notes.entrySeq().map(note => this.renderNoteColumn(note))
               : <ReactLoading className="loading-icon" type="spin" color="#444"/>
           }
@@ -39,7 +40,8 @@ class NoteList extends Component {
 
 function mapStateToProps(state) {
   return {
-    notes: state.notes
+    notes: state.notes,
+    status: state.status
   };
 }
 

@@ -1,4 +1,5 @@
 import { GET_NOTES, CREATE_NOTE, EDIT_NOTE, DELETE_NOTE, addNoteToList, getNotesReceived } from '../actions/note';
+import { retrievedData } from '../actions/status';
 import NoteService from '../services/noteService';
 
 const noteService = new NoteService();
@@ -12,6 +13,7 @@ const dataService = store => next => action => {
           const data = res.data.data;
           const action = getNotesReceived(data);
           next(action);
+          next(retrievedData());
         });
 
       break;
