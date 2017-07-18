@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactLoading from 'react-loading';
-import '../style/NoteList.scss';
-import Note from './Note';
 import { Grid, Col } from 'react-bootstrap';
+import Note from './Note';
+import '../style/NoteList.scss';
 
-const style = {
-  marginTop: 20,
-  marginBottom: 20
-};
-
-//TODO: refactor all the key gen
 class NoteList extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +16,7 @@ class NoteList extends Component {
   renderNoteColumn(note) {
     note = note[1];
     return (
-      <Col key={note + note.id} xs={12} sm={6} lg={4}>
+      <Col key={'note-col-' + note.id} xs={12} sm={6} lg={4}>
         <Note key={note.id} id={note.id} title={note.title} content={note.content}/>
       </Col>
     );
@@ -30,11 +24,13 @@ class NoteList extends Component {
 
   render() {
     return (
-      <div style={style}>
+      <div>
         <Grid>
-          {this.props.notes.size
-            ? this.props.notes.entrySeq().map(note => this.renderNoteColumn(note))
-            : <ReactLoading className="loading-icon" type="spin" color="#444"/>}
+          {
+            this.props.notes.size
+              ? this.props.notes.entrySeq().map(note => this.renderNoteColumn(note))
+              : <ReactLoading className="loading-icon" type="spin" color="#444"/>
+          }
         </Grid>
       </div>
     );

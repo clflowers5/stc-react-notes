@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { findDOMNode } from 'react-dom';
 import { Grid, ControlLabel, FormGroup, FormControl, Button } from 'react-bootstrap';
-import '../style/CreateNote.scss';
 import NoteService from '../services/noteService';
-import { addNote, editNote } from '../actions/note';
+import { createNote, editNote } from '../actions/note';
+import '../style/CreateNote.scss';
 
 class CreateNote extends Component {
 
@@ -35,27 +35,17 @@ class CreateNote extends Component {
     evt.preventDefault();
     this.disableSubmit();
 
-    const userId = 0; // Replace this with valid value if I get to User Auth
+    let action;
     let {title, content} = this.refs;
 
     if (this.state.action === 'Create') {
-      this.noteService.createNote(userId, findDOMNode(title).value, findDOMNode(content).value)
-        .then(resp => {
-          const {id, title, content} = resp.data.data;
-          const action = addNote(id, title, content);
-          this.props.dispatch(action);
-          this.props.history.push('/');
-        });
+      action = createNote(findDOMNode(title).value, findDOMNode(content).value);
     } else {
-      title = findDOMNode(title).value;
-      content = findDOMNode(content).value;
-      this.noteService.updateNote(userId, this.state.id, title, content)
-        .then(() => {
-          const action = editNote(this.state.id, title, content);
-          this.props.dispatch(action);
-          this.props.history.push('/');
-        });
+      action = editNote(this.state.id, findDOMNode(title).value, findDOMNode(content).value);
     }
+
+    this.props.dispatch(action);
+    this.props.history.push('/');
   }
 
   disableSubmit() {
